@@ -11,3 +11,6 @@ provider "aws" {
    region = "us-east-1"
 }
 
+resource "terraform_data" "content_version" {
+   input = var.content_version
+}
