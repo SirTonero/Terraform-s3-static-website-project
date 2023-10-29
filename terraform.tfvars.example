@@ -1,0 +1,7 @@
+bucket_name = "mrtonero-website-bucket"
+
+public_path = "/Users/mrtonero/Desktop/Terraform_s3_website/public"
+
+content_version = 1
+
+assets_path = "/Users/mrtonero/Desktop/Terraform_s3_website/public/assets"
