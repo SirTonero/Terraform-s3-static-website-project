@@ -5,3 +5,5 @@ public_path = "/Users/mrtonero/Desktop/Terraform_s3_website/public"
 content_version = 1
 
 assets_path = "/Users/mrtonero/Desktop/Terraform_s3_website/public/assets"
+
+bucket_policy_path = "/Users/mrtonero/Desktop/Terraform_s3_website/modules/s3_website_hosting/bucket_policy.json"
