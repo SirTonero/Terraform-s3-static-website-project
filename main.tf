@@ -4,4 +4,5 @@ module "s3_website_module" {
    public_path = var.public_path
    content_version = var.content_version
    assets_path = var.assets_path
+   bucket_policy_path = var.bucket_policy_path
 }

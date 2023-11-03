@@ -15,3 +15,8 @@ variable "assets_path" {
    description = "path  to assets files"
    type = string
 }
+
+variable "bucket_policy_path" {
+   description = "path to bucket policy files"
+   type = string
+}

@@ -101,3 +101,44 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 }
 
 ## Bucket Policy to allow cloudfront access
+
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+# Used to get the current user identity of the aws account to be used.
+data "aws_caller_identity" "current" {}
+
+locals {
+   bucket_policy = templatefile(var.bucket_policy_path, {
+      bucket_arn = aws_s3_bucket.website_bucket.arn,
+      account_id = data.aws_caller_identity.current.account_id,
+      distribution_id = aws_cloudfront_distribution.s3_distribution.id
+   })
+}
+
+
+
+
+
+resource "aws_s3_bucket_policy" "s3_bucket_policy"{
+   bucket = aws_s3_bucket.website_bucket.bucket
+   policy = local.bucket_policy
+   # policy = jsonencode({
+   #    "Version" = "2012-10-17",
+   #    "Statement" =  {
+   #       "Sid" = "AllowCloudFrontServicePrincipalReadOnly",
+   #       "Effect" = "Allow",
+   #       "Principal" = {
+   #          "Service" = "cloudfront.amazonaws.com"
+   #       },
+   #       "Action" = "s3:GetObject",
+   #       "Resource" = "${aws_s3_bucket.website_bucket.arn}/*",
+   #       "Condition" = {
+   #          "StringEquals" = {
+   #             "AWS:SourceArn" = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
+   #          }
+   #       }
+   #    }, 
+   # })
+}
+
+
+
